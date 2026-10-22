@@ -25,3 +25,24 @@
     els.forEach(function (el) { io.observe(el); });
   } else { els.forEach(function (el) { el.classList.add('in'); }); }
 })();
+
+(function () {
+  var reels = Array.prototype.slice.call(document.querySelectorAll('.reel'));
+  var fine = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  function stop(r) { var v = r.querySelector('video'); v.pause(); r.classList.remove('playing'); }
+  reels.forEach(function (r) {
+    var v = r.querySelector('video');
+    v.addEventListener('ended', function () { r.classList.remove('playing'); });
+    function toggle() {
+      if (r.classList.contains('playing') && !v.muted) { stop(r); return; }
+      reels.forEach(function (o) { if (o !== r) stop(o); });
+      v.muted = false; v.play(); r.classList.add('playing');
+    }
+    r.addEventListener('click', toggle);
+    r.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); } });
+    if (fine) {
+      r.addEventListener('mouseenter', function () { if (!r.classList.contains('playing')) { v.muted = true; v.play().catch(function(){}); } });
+      r.addEventListener('mouseleave', function () { if (v.muted) { v.pause(); } });
+    }
+  });
+})();
