@@ -67,7 +67,7 @@ img{display:block;max-width:100%}
 .hero{position:relative;height:100dvh;width:100%;overflow:hidden;background:var(--ink)}
 .hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 50% 55%,#3a3833 0%,#1c1b19 55%,#0e0e0e 100%)}
 .hero-shade{position:absolute;left:0;right:0;bottom:0;height:34vh;z-index:25;pointer-events:none;background:linear-gradient(to top,rgba(14,14,14,.85),rgba(14,14,14,0))}
-.hero-cut{position:absolute;z-index:20;pointer-events:none;left:50%;bottom:0;transform-origin:bottom center;height:78dvh;width:auto;max-width:none;translate:-50% 0;-webkit-mask-image:linear-gradient(to right,transparent 0,#000 14%,#000 86%,transparent 100%);mask-image:linear-gradient(to right,transparent 0,#000 14%,#000 86%,transparent 100%)}
+.hero-cut{position:absolute;z-index:20;pointer-events:none;left:50%;bottom:0;transform-origin:bottom center;height:min(78dvh,118vw);width:auto;max-width:none;translate:-50% 0;-webkit-mask-image:linear-gradient(to right,transparent 0,#000 14%,#000 86%,transparent 100%);mask-image:linear-gradient(to right,transparent 0,#000 14%,#000 86%,transparent 100%)}
 @media(min-width:640px){.hero-cut{height:88dvh}}
 .marquee-wrap{position:absolute;left:0;right:0;top:20vh;z-index:10;overflow:hidden}
 @media(min-width:640px){.marquee-wrap{top:14vh}}
