@@ -195,5 +195,5 @@ html{scroll-behavior:smooth}
 .reel-cap{display:flex;justify-content:space-between;gap:12px;margin-top:12px;font-size:14px}
 .reel-cap span:last-child{color:var(--muted)}
 .reel:focus-visible{outline:2px solid var(--cream);outline-offset:4px}
-@media(max-width:639px){.hero-cut{translate:-61% 0}}
+@media(max-width:639px){.hero-cut{translate:-45% 0}}
 .credit a{text-decoration:underline;text-underline-offset:3px;color:var(--cream)}
