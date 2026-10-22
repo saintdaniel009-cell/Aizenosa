@@ -169,3 +169,13 @@ img{display:block;max-width:100%}
 @media(min-width:640px){.wa{right:32px;bottom:32px}}
 .open .wa{opacity:0;pointer-events:none}
 .hero-foot .r{margin-right:72px}@media(min-width:640px){.hero-foot .r{margin-right:80px}}
+
+/* scroll cue */
+.scroll-cue{position:absolute;left:50%;bottom:calc(5.5rem + 16px);z-index:31;display:flex;flex-direction:column;align-items:center;gap:10px;font-size:11px;text-transform:uppercase;letter-spacing:.2em;translate:-50% 0}
+@media(min-width:640px){.scroll-cue{bottom:32px}}
+.sc-track{position:relative;width:1px;height:40px;background:rgba(239,238,233,.25);overflow:hidden}
+.sc-dot{position:absolute;left:0;top:0;width:1px;height:14px;background:var(--cream);animation:scrollDot 1.8s var(--ease-io) infinite}
+@keyframes scrollDot{0%{transform:translateY(-14px)}70%,100%{transform:translateY(40px)}}
+.scroll-cue:hover .sc-label{opacity:.6}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.sc-dot{animation:none;transform:translateY(13px)}}
