@@ -283,3 +283,12 @@ html{scroll-behavior:smooth}
 .hero-cta{text-shadow:0 1px 14px rgba(0,0,0,.65)}
 .cta-wa{text-shadow:none}
 @media(max-width:639px){.hero-cta{bottom:7.6rem}.cta-wa{padding:14px 16px;font-size:14px}.hero-btns{gap:10px 16px;margin-top:14px}.hero-sub{margin-top:8px;font-size:13px}}
+/* mobile: keep text off the portrait. headline+proof in the empty band above the name, buttons below the chin */
+@media(max-width:639px){
+  .hero-cta{top:0;bottom:0;left:var(--gutter);right:var(--gutter);max-width:none;pointer-events:none}
+  .hero-h{position:absolute;top:5.1rem;left:0;right:0;font-size:25px;max-width:none}
+  .hero-sub{position:absolute;top:calc(5.1rem + 62px);left:0;right:0;margin:0;font-size:12.5px;max-width:none}
+  .hs-a{display:none}
+  .hero-btns{position:absolute;left:0;right:0;bottom:6.2rem;margin:0;pointer-events:auto}
+}
+@media(max-width:639px) and (max-height:720px){.hero-sub{display:none}}
