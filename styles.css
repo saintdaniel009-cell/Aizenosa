@@ -301,3 +301,9 @@ html{scroll-behavior:smooth}
   .hs-a{display:inline}
 }
 @media(max-width:639px) and (max-height:720px){.hero-sub{display:block}}
+/* mobile: anchor headline block right above the portrait */
+@media(max-width:639px){
+  .hero-cta{display:flex;flex-direction:column;justify-content:flex-end;top:0;bottom:calc(min(72dvh,112vw) + 14px);padding-top:5.2rem}
+  .hero-btns{bottom:calc(6.2rem - min(72dvh,112vw) - 14px)}
+}
+@media(max-width:639px) and (max-height:720px){.hs-a{display:none}}
