@@ -87,6 +87,11 @@
     });
   });
 
+  var more = document.querySelector('details.more');
+  document.querySelectorAll('[data-project],a[data-type]').forEach(function (a) {
+    a.addEventListener('click', function () { if (more) more.open = true; });
+  });
+
   form.addEventListener('input', function (e) { e.target.classList && e.target.classList.remove('bad'); });
 
   form.addEventListener('submit', function (e) {
@@ -122,6 +127,57 @@
       .catch(function () {
         btn.disabled = false; btn.innerHTML = 'Send enquiry &rarr;';
         msg.innerHTML = 'That didn’t send. Please email <a class="u" href="mailto:' + EMAIL + '">' + EMAIL + '</a> or try again.';
+        msg.classList.add('err');
+      });
+  });
+})();
+
+
+(function () {
+  var WA_SRC = '';
+  try { var q = new URLSearchParams(location.search); if (q.get('utm_source')) WA_SRC = ' (via ' + q.get('utm_source') + ')'; } catch (e) {}
+  if (WA_SRC) document.querySelectorAll('a[href*="wa.me/"]').forEach(function (a) { a.href += encodeURIComponent(WA_SRC); });
+
+  var form = document.getElementById('quick');
+  if (!form) return;
+  var EMAIL = 'hello@aizenosaabu.com';
+  var msg = form.querySelector('.f-msg');
+  var btn = form.querySelector('.f-btn');
+  var need = form.querySelector('input[name="Need"]');
+  document.querySelectorAll('[data-package]').forEach(function (a) {
+    a.addEventListener('click', function () {
+      var names = { starter: 'Starter retainer', growth: 'Growth retainer', partner: 'Content Partner retainer' };
+      need.value = names[a.dataset.package] || '';
+    });
+  });
+  form.addEventListener('input', function (e) { e.target.classList && e.target.classList.remove('bad'); });
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    msg.textContent = ''; msg.classList.remove('err');
+    var firstBad = null;
+    form.querySelectorAll('input[required]').forEach(function (el) {
+      if (!el.value.trim()) { el.classList.add('bad'); if (!firstBad) firstBad = el; }
+    });
+    if (firstBad) { msg.textContent = 'Please fill in the highlighted fields.'; msg.classList.add('err'); firstBad.focus(); return; }
+    var data = {};
+    new FormData(form).forEach(function (v, k) { if (v !== '') data[k] = v; });
+    if (data._honey) return;
+    data['Enquiry type'] = 'Quick enquiry';
+    data._subject = 'New quick enquiry from ' + (data.Name || 'the website');
+    data._template = 'table'; data._captcha = 'false';
+    btn.disabled = true; btn.textContent = 'Sending…';
+    fetch('https://formsubmit.co/ajax/' + EMAIL, {
+      method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }, body: JSON.stringify(data)
+    }).then(function (r) { return r.json().then(function (j) { if (!r.ok || String(j.success) !== 'true') throw new Error(j.message || 'Failed'); }); })
+      .then(function () {
+        var sec = form.closest('section');
+        sec.querySelector('.grid').hidden = true;
+        sec.querySelector('.f-done').hidden = false;
+        sec.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      })
+      .catch(function () {
+        btn.disabled = false; btn.innerHTML = 'Message me &rarr;';
+        msg.innerHTML = 'That didn’t send. Please use WhatsApp or email <a class="u" href="mailto:' + EMAIL + '">' + EMAIL + '</a>.';
         msg.classList.add('err');
       });
   });
